@@ -18,45 +18,49 @@ class Manage
     {  
         //you can put any file name or directory here
 	  include $class . '.php';
-	  
-	  }
-	    }
+	   
+     }
+     
+   }
        
-       spl_autoload_register(array('Manage', 'autoload'));
+        spl_autoload_register(array('Manage', 'autoload'));
         //instantiate the program object
-       $obj = new main();
+        $obj = new main();
 
 
 class main
 {
     public function __construct()
         {
-	   //print_r($_REQUEST);
+	   
 	   //set default page request when no parameters are in URL
 	        $pageRequest = 'uploadform';
-	    //check if there are parameters
+	   
+	   //check if there are parameters
 
                if(isset($_REQUEST['page']))
 	       {
 	         //load the type of page the request wants into page request
 		     $pageRequest = $_REQUEST['page'];
-	          }
+	        }
 	
-	 //instantiate the class that is being requested
-	    $page = new $pageRequest;
+	  //instantiate the class that is being requested
+	        $page = new $pageRequest;
 	
-	  if($_SERVER['REQUEST_METHOD'] == 'GET')
-	    {
-	       $page->get();
-	      }
-	       else
+	        if($_SERVER['REQUEST_METHOD'] == 'GET')
+	        {
+	             $page->get();
+	        }
+	        else
 	        {   
-		  $page->post();
-		    }
-           }
+		     $page->post();
+		 }
+          
 	  }
+ }
+
       
-////////////////////
+        
         abstract class page
              {
               protected $html;
@@ -78,14 +82,15 @@ class main
 	          echo 'default get message';
 	       }
 	        
-	public function post()
-	{
-	print_r($_POST);
-           }
-         }
+   	     public function post()
+ 	       {
+ 	          print_r($_POST);
+               }
+            }
 
-////////////////////  
-	////AAA
+
+
+         ////Making uploadform
 	 class makeform
            {
              static  public  function formula()
@@ -106,8 +111,9 @@ class main
 
                 }
             }
-         
-         ///BBB
+
+
+         ///Creating StaticHeader to Redirect the File
 	 class staticheader
 	   {
 	    static public function callheader($target_file)
@@ -119,7 +125,8 @@ class main
 		 }
            }
 
-         ///CCC=(AAA+BBB)   (Calling the Above Two Classes in uploadform)
+        
+	/// Calling the Above Two Classes in uploadform class
          class uploadform extends page
            {
             //Form to Upload CSV File
@@ -155,7 +162,7 @@ class main
              } 
       
 
-////////////////////
+
             class  Table extends  page
                  {
                    public function get()
